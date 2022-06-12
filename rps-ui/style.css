@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: roboto, sans-serif;
+    background-color:hsl(176, 12%, 43%);
+}
+
+/*HEADER*/
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: aquamarine;
+}
+
+/*MESSAGE*/
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.message h3 {
+    font-size: 25px;
+
+}
+
+.message p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/*GAME*/
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice {
+    width: 160px;
+    height: 160px;
+    box-shadow: 0 0 1rem;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/*BUTTONS*/
+.buttons {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding-top: 50px;
+}
+
+.buttons img {
+    width: 130px;   
+}
+
+button {
+    margin: 30px;
+    padding: 14px;
+    box-shadow: 0 0 1rem;
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+/*FOOTER*/
+.footer {
+    /*fix position*/
+    position: absolute;
+    bottom: 0;
+    width: 100%;   
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 20px;
+}
+
+.footer img {
+    max-width: 25px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+

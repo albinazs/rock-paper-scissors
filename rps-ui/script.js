@@ -1,19 +1,13 @@
-// TO DO replace with switch/break and wo var - just return
-// try to use array instead?
-
 // function on getting computer's input
 function computerPlay() {
     let random = Math.floor(Math.random() * 3) + 1;
 
     if (random == 1) {
-        let computer_input = "ROCK"; //return "ROCK"
-        return computer_input;
+        return "ROCK"; 
     } else if (random == 2) {
-        let computer_input = "PAPER";
-        return computer_input;
+        return "PAPER";
     } else {
-        let computer_input = "SCISSORS";
-        return computer_input;
+        return "SCISSORS";
     }    
 
 };
@@ -65,46 +59,5 @@ function playRound() {
     }
 }
 
-// function on simulating a game of 5 rounds
-function game () {
+//playRound();
 
-    // setting counters of both user's and computer's wins
-    let userCounter = 0;
-    let computerCounter = 0;
-
-    // running 5 rounds of a game
-    for (let i = 0; i < 5; i++) {
-        let roundResult = playRound(); 
-
-        if(roundResult == "user") {
-            userCounter += 1;   
-        } else if (roundResult == "computer") {  
-            computerCounter += 1;
-        } 
-    }
-
-    // checking who is the winner of the game
-    if (userCounter > computerCounter) {
-        console.log("You won this game!");
-    } else if (userCounter < computerCounter) {
-        console.log("You lost this game!");
-    } else {
-        console.log("It's a tie!");
-    }
-
-}
-
-// simulating a game of 5 rounds
-game();
-
-
-// <button onclick="myFunction()">Try it</button>
-
-<p id="demo"></p>
-<script>
-const fruits = ["Banana", "Orange", "Apple"];
-document.getElementById("demo").innerHTML = fruits;
-function myFunction() {
-  fruits.push("Lemon");
-  document.getElementById("demo").innerHTML = fruits;
-}
