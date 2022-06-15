@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="script.js"></script>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
+<div class="header">
+    <h1>ROCK PAPER SCISSORS</h1>
+</div>   
+<div class="main">
+    <div class="message">
+        <h3>Choose your weapon</h3>
+        <p class="m">Fight to score 5 points to win this game</p>
+    </div>
+    <div class="game">
+        <div class="player">
+            <div class="choice p">?</div>
+            <div class="score">Player:<span class="ps">0</span></div>
+        </div>
+        <div class="computer">
+            <div class="choice c">?</div>
+            <div class="score">Computer:<span class="cs">0</span></div>
+        </div>
+    </div>
+    <div class="buttons">
+            <button class="rock">
+                <img src="./img/rock.png" alt="rock">
+            </button>
+            <button class="paper">
+                <img src="./img/paper.png" alt="paper">
+            </button>
+            <button class="scissors">
+                <img src="./img/scissors.png" alt="scissors">
+            </button>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>Copyright &#169; albinazs</p>
+    <a href="https://github.com/albinazs/rock-paper-scissors"><img src="./img/github.png"/></a>
+    <a href="https://www.flaticon.com" title="icons">Icons created by Flaticon</a>    
+</div>
+<div class="modal" id="endgameModal">
+    <p class="modal-title" id="endgameMsg"></p>
+    <button class="restart">Play again</button>
+  </div>
+  <div class="overlay" id="overlay"></div>
 </body>
 </html>
