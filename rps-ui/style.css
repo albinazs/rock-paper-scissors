@@ -56,6 +56,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 100px;
+    background-color: aquamarine;
 }
 
 .score {
@@ -87,7 +88,7 @@ button {
     margin: 30px;
     padding: 14px;
     box-shadow: 0 0 1rem;
-    background-color: aquamarine;
+    background-color: rgb(140, 174, 162);
     cursor: pointer;
     transition: all .07s ease;
 }
@@ -99,6 +100,7 @@ button * {
 .animated {
     transform: scale(1.1);
     box-shadow: 0 0 2rem;
+    transition: all .07s ease;
 }
 
 /*FOOTER*/
@@ -123,4 +125,48 @@ a {
     text-decoration: none;
     color: black;
 }
+
+/*MODALS - by michalosman*/
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 30px;
+    user-select: none;
+    transform: translate(-50%, -50%) scale(1);
+    transition: 200ms ease-in-out;
+  }
+  
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: rgb(140, 174, 162);
+  }
+
+  .restart {
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+  }  
+ 
+  .overlay.active {
+    display: block;
+  }
+  
 

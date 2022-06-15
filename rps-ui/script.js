@@ -1,3 +1,37 @@
+let computerCounter = 0;
+let playerCounter = 0;
+let roundResult = '';
+
+// function on simulating a single play round
+function playRound(playerSelection) {
+
+    const computerSelection = computerPlay();
+
+    if ((computerSelection === "ROCK" && playerSelection === "SCISSORS") ||
+    (computerSelection === "PAPER" && playerSelection === "ROCK")  ||
+    (computerSelection === "SCISSORS" && playerSelection === "PAPER")
+    ) {
+        roundResult = "computer";
+        computerCounter++;
+    }
+    else if ((computerSelection === "ROCK" && playerSelection === "PAPER") ||
+    (computerSelection === "PAPER" && playerSelection === "SCISSORS") ||
+    (computerSelection === "SCISSORS" && playerSelection === "ROCK")
+    ) {
+        roundResult = "player";
+        playerCounter++;
+    } else if (playerSelection === computerSelection) {
+        roundResult = "tie";
+    }
+    updateChoice(computerSelection, playerSelection);
+    getMessage(roundResult, computerSelection, playerSelection)
+
+    if (gameOver()) {
+        openEndgameModal()
+        setFinalMessage()
+      }
+}
+
 // function on getting computer's input
 function computerPlay() {
     let random = Math.floor(Math.random() * 3) + 1;
@@ -10,153 +44,114 @@ function computerPlay() {
     }    
 };
 
-// function on getting user's input
-function userPlay(e) {
-    if(e.target.classList.contains('rock')) {
-        return 'ROCK';
-    } else if(e.target.classList.contains('paper')) {
-        return "PAPER";
-    } else {
-        return "SCISSORS";
-    }
-}
-
-// function on simulating a single play round
-function playRound(e) {
-    console.log(e);
-    console.log(e.target.classList)
-
-    const m1 = document.querySelector('h3');
-    const m2 = document.querySelector('.m');
-    const cChoicePic = document.querySelector('.choice.c');
-    const pChoicePic = document.querySelector('.choice.p');
-
-    const rockPic = document.createElement('img');
-    rockPic.setAttribute('src', './img/rock.png');
-    rockPic.setAttribute('style', 'width: 130px;');
-    const paperPic = document.createElement('img');
-    paperPic.setAttribute('src', './img/paper.png');
-    paperPic.setAttribute('style', 'width: 130px;');
-    const scissorsPic = document.createElement('img');
-    scissorsPic.setAttribute('src', './img/scissors.png');
-    scissorsPic.setAttribute('style', 'width: 130px;');
-    
-    let computerSelection = computerPlay();
-    console.log(computerSelection); 
-
-    let playerSelection = userPlay(e);
+function updateChoice (computerSelection, playerSelection) {
 
     pChoicePic.textContent = "";
     cChoicePic.textContent = "";
 
-    // check if computer wins
-    if (computerSelection == "ROCK" && playerSelection == "SCISSORS") {
-        m1.textContent = 'You lose!';
-        m2.textContent = `${computerSelection} beats ${playerSelection}`;      
-        cChoicePic.appendChild(rockPic);
-        pChoicePic.appendChild(scissorsPic);
-        let roundResult = "computer";
-        return roundResult;
-    } else if (computerSelection == "PAPER" && playerSelection == "ROCK") {
-        m1.textContent = 'You lose!';
-        m2.textContent = `${computerSelection} beats ${playerSelection}`;
-        cChoicePic.appendChild(paperPic);
-        pChoicePic.appendChild(rockPic);
-        let roundResult = "computer";
-        return roundResult;
-    } else if (computerSelection == "SCISSORS" && playerSelection == "PAPER") { 
-        m1.textContent = 'You lose!';
-        m2.textContent = `${computerSelection} beats ${playerSelection}`;
-        cChoicePic.appendChild(scissorsPic);
-        pChoicePic.appendChild(paperPic);
-        let roundResult = "computer";
-        return roundResult;
-    } 
-    // check if user wins
-    else if (computerSelection == "ROCK" && playerSelection == "PAPER") {
-        m1.textContent = 'You win!';
-        m2.textContent = `${playerSelection} beats ${computerSelection}`;
-        cChoicePic.appendChild(rockPic);
-        pChoicePic.appendChild(paperPic);
-        let roundResult = "user";
-        return roundResult;
-    } else if (computerSelection == "PAPER" && playerSelection == "SCISSORS") {
-        m1.textContent = 'You win!';
-        m2.textContent = `${playerSelection} beats ${computerSelection}`;
-        cChoicePic.appendChild(paperPic);
-        pChoicePic.appendChild(scissorsPic);
-        let roundResult = "user";
-        return roundResult;   
-    } else if (computerSelection == "SCISSORS" && playerSelection == "ROCK") {
-        m1.textContent = 'You win!';
-        m2.textContent = `${playerSelection} beats ${computerSelection}`;
-        cChoicePic.appendChild(scissorsPic);
-        pChoicePic.appendChild(rockPic);
-        let roundResult = "user";
-        return roundResult;
-    }
-    // check if it's a tie
-    else {
-        m1.textContent = 'It\'s a tie!';
-        m2.textContent = `${playerSelection} ties with ${computerSelection}`;
-        let roundResult = "tie";
-        if (computerSelection == "ROCK" && playerSelection == "ROCK") {
+    switch (computerSelection) {
+        case "ROCK":
             cChoicePic.appendChild(rockPic);
-            pChoicePic.appendChild(rockPic.cloneNode(true));         
-        } else if (computerSelection == "PAPER" && playerSelection == "PAPER") {
+            break;
+        case "PAPER":
             cChoicePic.appendChild(paperPic);
-            pChoicePic.appendChild(paperPic.cloneNode(true));
-        } else {
+            break;
+        case "SCISSORS":
             cChoicePic.appendChild(scissorsPic);
+            break;
+    }
+
+    switch (playerSelection) {
+        case "ROCK":
+            pChoicePic.appendChild(rockPic.cloneNode(true));
+            break;
+        case "PAPER":
+            pChoicePic.appendChild(paperPic.cloneNode(true));
+            break;
+        case "SCISSORS":
             pChoicePic.appendChild(scissorsPic.cloneNode(true));
-        }
-        return roundResult;
+            break;
     }
 }
 
-function buttonAnimation(e) {
-    console.log(e.target.classList);
-    e.target.classList.add('animated');
+function getMessage(roundResult, computerSelection, playerSelection) {
+    if(roundResult === "computer") {
+     scoreMessage1.textContent = 'You lose!';
+     scoreMessage2.textContent = `${computerSelection} beats ${playerSelection}`;
+    } else if (roundResult === "player") {
+     scoreMessage1.textContent = 'You win!';
+     scoreMessage2.textContent = `${playerSelection} beats ${computerSelection}`;
+    } else if (roundResult === "tie") {
+     scoreMessage1.textContent = 'It\'s a tie!';
+     scoreMessage2.textContent = `${playerSelection} ties with ${computerSelection}`;
+    }
+ 
+    computerScore.textContent = computerCounter;
+    playerScore.textContent = playerCounter;
+ }
+
+function gameOver() {
+    return computerCounter === 5 || playerCounter === 5;
 }
 
-function removeAnimation(e) {
-    console.log(e.target.classList);
-    e.target.classList.remove('animated');
-}
+const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scissorsButton = document.querySelector('.scissors');
+const scoreMessage1 = document.querySelector('h3');
+const scoreMessage2 = document.querySelector('.m');
+const cChoicePic = document.querySelector('.choice.c');
+const pChoicePic = document.querySelector('.choice.p');
+const computerScore = document.querySelector('.cs');
+const playerScore = document.querySelector('.ps');
+const endgameModal = document.querySelector('.endgameModal');
+const endgameMessage = document.querySelector('.endgameMessage');
+const overlay = document.querySelector('.overlay');
+const restartButton = document.querySelector('.restart');
 
-//add event listeners to each button and call playround
+const rockPic = document.createElement('img');
+rockPic.setAttribute('src', './img/rock.png');
+rockPic.setAttribute('style', 'width: 130px;');
+const paperPic = document.createElement('img');
+paperPic.setAttribute('src', './img/paper.png');
+paperPic.setAttribute('style', 'width: 130px;');
+const scissorsPic = document.createElement('img');
+scissorsPic.setAttribute('src', './img/scissors.png');
+scissorsPic.setAttribute('style', 'width: 130px;');
+
 const buttons = Array.from(document.querySelectorAll('button'));
-buttons.forEach(button => button.addEventListener('click', playRound));
-buttons.forEach(button => button.addEventListener('mouseover', buttonAnimation));
-buttons.forEach(button => button.addEventListener('mouseout', removeAnimation));
+buttons.forEach(button => button.addEventListener('mouseover', (e) => e.target.classList.add('animated')));
+buttons.forEach(button => button.addEventListener('mouseout', (e) => e.target.classList.remove('animated')));
 
-function game () {
+rockButton.addEventListener('click', () => playRound('ROCK'));
+paperButton.addEventListener('click', () => playRound('PAPER'));
+scissorsButton.addEventListener('click', () => playRound('SCISSORS'));
 
-    const cs = document.querySelector('.cs');
-    const ps = document.querySelector('.ps');
-    
-    // setting counters of both user's and computer's wins
-    let computerCounter = 0;
-    let userCounter = 0;
-    
-    // running rounds of a game
-    let roundResult = playRound(); 
+restartButton.addEventListener('click', restartGame)
+overlay.addEventListener('click', () => {
+    endgameModal.classList.remove('active')
+    overlay.classList.remove('active')
+});
 
-        if(roundResult == "user") {
-            userCounter += 1;   
-        } else if (roundResult == "computer") {  
-            computerCounter += 1;
-        } 
-
-        cs.textContent = computerCounter;
-        ps.textContent = userCounter;
-
-    // checking who is the winner of the game
-    if (userCounter == 5) {
-        console.log("You won this game!");
-    } else if (computerCounter == 5) {
-        console.log("You lost this game!");
-    } else return;
-
-}
-
+function openEndgameModal() {
+    endgameModal.classList.add('active')
+    overlay.classList.add('active')
+  }
+  
+  function setFinalMessage() {
+    return playerCounter > computerCounter
+      ? (endgameMessage.textContent = 'You won!')
+      : (endgameMessage.textContent = 'You lost!')
+  }
+  
+  function restartGame() {
+    playerCounter = 0;
+    computerCounter = 0;
+    scoreMessage1.textContent = 'Choose your weapon'
+    scoreMessage2.textContent = 'First to score 5 points wins the game'
+    pChoicePic.textContent = "?";
+    cChoicePic.textContent = "?";
+    computerScore.textContent = "0";
+    playerScore.textContent = "0";
+    endgameModal.classList.remove('active');
+    overlay.classList.remove('active');
+  }
