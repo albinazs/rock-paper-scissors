@@ -94,4 +94,3 @@ function game () {
 // simulating a game of 5 rounds
 game();
 
-
